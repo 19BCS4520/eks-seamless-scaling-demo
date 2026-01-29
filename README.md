@@ -4,17 +4,21 @@
 ![Status](https://img.shields.io/badge/Status-Beta-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+
+
 ## 📖 Overview
 This repository demonstrates two revolutionary features in **Kubernetes 1.33** that eliminate the "Restart Tax" for critical workloads:
 
 1.  **In-Place Pod Resizing:** Dynamically scale CPU/Memory without restarting the container.
 2.  **Native Sidecars:** Guarantee sidecar readiness (e.g., Service Mesh, Loggers) before the application starts.
 
+
 ## 🏗️ Architecture
 The shift from destructive updates to seamless, in-place kernel patching.
 
-*(Add your 'legacy-vs-modern.png' to the images folder to see it here)*
-![Architecture](./images/legacy-vs-modern.png)
+![Legacy vs Modern Architecture](./images/legacy-vs-modern.png)
+
+*Figure 1: Comparison of the Legacy "Restart" model vs. the EKS 1.33 "In-Place" model.*
 
 ## 🛠️ Prerequisites
 * Kubernetes Cluster v1.33+ (or Minikube with `InPlacePodVerticalScaling=true`).
