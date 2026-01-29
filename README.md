@@ -16,7 +16,7 @@ This repository demonstrates two revolutionary features in **Kubernetes 1.33** t
 ## 🏗️ Architecture
 The shift from destructive updates to seamless, in-place kernel patching.
 
-![Legacy vs Modern Architecture](./images/legacy-vs-modern.png)
+![Legacy vs Modern Architecture](./images/legacy-vs-modern.png.png)
 
 *Figure 1: Comparison of the Legacy "Restart" model vs. the EKS 1.33 "In-Place" model.*
 
