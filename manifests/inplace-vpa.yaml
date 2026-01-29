@@ -1,0 +1,18 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: secure-pay-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: secure-pay-gateway
+  updatePolicy:
+    updateMode: "Auto"  # <--- The Feature: In-Place Updates
+  resourcePolicy:
+    containerPolicies:
+      - containerName: "*"
+        minAllowed:
+          memory: "100Mi"
+        maxAllowed:
+          memory: "1Gi"

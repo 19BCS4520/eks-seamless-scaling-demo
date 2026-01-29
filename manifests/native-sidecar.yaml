@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: native-sidecar-demo
+  labels:
+    app: sidecar-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidecar-demo
+  template:
+    metadata:
+      labels:
+        app: sidecar-demo
+    spec:
+      initContainers:
+      - name: security-proxy
+        image: alpine:latest
+        restartPolicy: Always  # <--- The Feature: Native Sidecar
+        command: ["sh", "-c", "echo 'Proxy Starting...'; sleep 5; echo 'Proxy READY'; sleep infinity"]
+      containers:
+      - name: main-app
+        image: nginx:alpine
+        ports:
+        - containerPort: 80

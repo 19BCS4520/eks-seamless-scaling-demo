@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-pay-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secure-pay
+  template:
+    metadata:
+      labels:
+        app: secure-pay
+    spec:
+      initContainers:
+      - name: istio-proxy
+        image: alpine:latest
+        restartPolicy: Always
+        command: ["sh", "-c", "echo 'Proxy Init...'; sleep 2; echo 'Proxy Ready'; sleep infinity"]
+      containers:
+      - name: payment-app
+        image: python:3.9-slim
+        command: ["python", "-c", "import time; print('App Started'); time.sleep(3600)"]
+        resizePolicy:
+          - resourceName: memory
+            restartPolicy: NotRequired # <--- The Feature: No Restart
+          - resourceName: cpu
+            restartPolicy: NotRequired
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
